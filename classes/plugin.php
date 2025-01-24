@@ -22,8 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Player that creates ottflix embedding.
  *
@@ -40,14 +38,14 @@ class media_ottflix_plugin extends core_media_player_external {
      *
      * @return array
      */
-    public function list_supported_urls(array $urls, array $options = array()) {
-        $result = array();
+    public function list_supported_urls(array $urls, array $options = []) {
+        $result = [];
         foreach ($urls as $url) {
             // If OttFlix support is enabled, URL is supported.
 
-            if (($url->get_host() === 'app.ottflix.com.br')) {
+            if (($url->get_host() === "app.ottflix.com.br")) {
                 $result[] = $url;
-            } else if (($url->get_host() === 'player.ottflix.com.br')) {
+            } else if (($url->get_host() === "player.ottflix.com.br")) {
                 $result[] = $url;
             }
         }
@@ -96,7 +94,7 @@ class media_ottflix_plugin extends core_media_player_external {
      * @throws coding_exception
      */
     public function supports($usedextensions = []) {
-        return get_string('support_ottflix', 'media_ottflix');
+        return get_string("support_ottflix", "media_ottflix");
     }
 
     /**
@@ -106,8 +104,8 @@ class media_ottflix_plugin extends core_media_player_external {
      */
     public function get_embeddable_markers() {
         $markers = [
-            'app.ottflix.com.br',
-            'player.ottflix.com.br'
+            "app.ottflix.com.br",
+            "player.ottflix.com.br",
         ];
 
         return $markers;

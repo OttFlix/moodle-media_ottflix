@@ -24,10 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025011600;
+$plugin->version   = 2025012400;
+$plugin->release = '1.0.2';
 $plugin->requires  = 2022111800;
 $plugin->component = 'media_ottflix';
+$plugin->maturity = MATURITY_STABLE;
 
 $plugin->dependencies = [
-    "mod_supervideo" => 2025011600,
+    "mod_supervideo" => 2025012400,
 ];

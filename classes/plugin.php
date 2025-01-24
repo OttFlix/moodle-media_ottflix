@@ -37,6 +37,7 @@ class media_ottflix_plugin extends core_media_player_external {
      *
      * @param array $urls
      * @param array $options
+     *
      * @return array
      */
     public function list_supported_urls(array $urls, array $options = array()) {
@@ -62,42 +63,37 @@ class media_ottflix_plugin extends core_media_player_external {
      * @param int $width
      * @param int $height
      * @param array $options
+     *
      * @return string
+     *
+     * @throws coding_exception
+     * @throws dml_exception
      */
     protected function embed_external(moodle_url $url, $name, $width, $height, $options) {
-        global $USER, $COURSE;
-
-        $config = get_config('ottflix');
-
-        $safetyplayer = "";
-        if ($config->safety && $config->safety != 'none') {
-            $safety = $config->safety;
-            if (strpos($safety, "profile") === 0) {
-                $safety = str_replace("profile_", "", $safety);
-                $safetyplayer = $USER->profile->$safety;
-            } else {
-                $safetyplayer = $USER->$safety;
-            }
-        }
+        global $COURSE;
 
         preg_match('/\/\w+\/\w+\/([A-Z0-9\-\_]{3,255})/', $url->get_path(), $path);
         if (isset($path[0])) {
             $identifier = $path[1];
-            return \media_ottflix\ottflix_media_video::getplayer($COURSE->id, $identifier, $safetyplayer);
+            return \mod_supervideo\ottflix\repository::getplayer($COURSE->id, $identifier);
         }
 
         preg_match('/\/\w+\/([A-Z0-9\-\_]{3,99})/', $url->get_path(), $path);
         if (isset($path[0])) {
             $identifier = $path[1];
-            return \media_ottflix\ottflix_media_video::getplayer($COURSE->id, $identifier, $safetyplayer);
+            return \mod_supervideo\ottflix\repository::getplayer($COURSE->id, $identifier);
         }
+
+        return null;
     }
 
     /**
      * Supports Text.
      *
      * @param array $usedextensions
+     *
      * @return mixed|string
+     * @throws coding_exception
      */
     public function supports($usedextensions = []) {
         return get_string('support_ottflix', 'media_ottflix');
@@ -120,6 +116,7 @@ class media_ottflix_plugin extends core_media_player_external {
 
     /**
      * Default rank
+     *
      * @return int
      */
     public function get_rank() {
@@ -132,11 +129,6 @@ class media_ottflix_plugin extends core_media_player_external {
      * @return bool True if player is enabled
      */
     public function is_enabled() {
-        $config = get_config('ottflix');
-        if (!$config->token) {
-            // return false;
-        }
-
-        return true;
+        return \mod_supervideo\ottflix\repository::is_enable();
     }
 }

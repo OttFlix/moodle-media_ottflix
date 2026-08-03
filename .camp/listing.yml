@@ -1,0 +1,24 @@
+# (RFC §4.1). Authors update their listing with an ordinary commit; camp
+# ingests and hash-pins it at each tagged release. Listing for media_ottflix.
+
+name: "OttFlix Filter Player"
+summary: "Embed OttFlix videos in content with secure automatic playback."
+description: |
+  Embed OttFlix videos in content with secure automatic playback.
+
+  OttFlix is an innovative solution that not only stores videos and audios but also converts these contents into interactive H5P formats, providing a richer and more engaging learning experience.
+
+  Key capabilities:
+  - Interactive Book Create an interactive book with various content such as videos, glossaries, quizzes, drag-and-drop activities, crossword puzzles, and more. Add a summary at the end, showing the student's score.
+  - Interactive Video Create interactive videos with chapters, glossaries, and summaries to reinforce learning.
+  - Digital Book Organize content into chapters in an engaging way to create a cohesive and interactive digital book.
+
+  Supported Moodle versions in the supplied plugin list: 4.0 - 5.0.
+
+labels:
+  - external-account
+  - paid-service
+category: "video"
+links:
+  docs: https://github.com/EduardoKrausME/moodle-media_ottflix#readme
+  issues: https://github.com/EduardoKrausME/moodle-media_ottflix/issues
